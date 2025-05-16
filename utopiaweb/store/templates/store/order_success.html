@@ -1,0 +1,38 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Order Confirmation - Utopia Streetwear{% endblock %}
+
+{% block content %}
+<div class="order-confirmation-container">
+    <h1>Order Confirmation</h1>
+    <p class="thank-you-message">Thank you for your order! Your order number is <strong>{{ order.id }}</strong>.</p>
+    <p class="confirmation-email">You will receive a confirmation email with your order details shortly.</p>
+
+    {% comment %} <!-- Order Summary Section -->
+   
+    <div class="order-summary">
+        <ul>
+            {% for item in order.items.all %}
+            <li class="order-item">
+                <div class="order-item-img">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                </div>
+                <div class="order-item-details">
+                    <span class="product-name">{{ item.product.name }}</span>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Rs {{ item.product.price }}</p>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Total Price -->
+    <div class="order-total">
+        <h3>Total: Rs {{ order.total_price }}</h3>
+    </div> {% endcomment %}
+
+    <a class="continue-shopping-btn" href="{% url 'shop' %}">Continue Shopping</a>
+</div>
+{% endblock %}

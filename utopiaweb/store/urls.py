@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('shop/', views.shop, name='shop'),
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('place_order/', views.place_order, name='place_order'),
+    path('order_success/<int:order_id>/', views.order_success, name='order_success'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
+    path('search/', views.search, name='search'),
+    path('filter/', views.filter_products, name='filter'),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('view_cart/', views.view_cart, name='view_cart'),
+    path('cart/', views.view_cart, name='cart'),
+    path('remove_from_cart/<int:cart_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('wishlist/', views.view_wishlist, name='wishlist'),  
+    path('add_to_wishlist/<int:product_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('view_wishlist/', views.view_wishlist, name='view_wishlist'),
+    path('remove_from_wishlist/<int:product_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('profile/', views.profile_view, name='profile'),
+    path('profile/', views.profile_view, name='profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('order-historyy/',views.order_history,name='order_history'),
+    path('order-detail/<int:order_id>/', views.order_detail, name='order_detail'),
+]

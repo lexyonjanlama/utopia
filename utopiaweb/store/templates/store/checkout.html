@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Checkout - Utopia Streetwear{% endblock %}
+
+{% block content %}
+<div class="checkout-container">
+    <h1 class="checkout-title">Checkout</h1>
+
+    <h2 class="checkout-subtitle">Your Cart</h2>
+    <div class="checkout-cart-items">
+        {% for item in cart_items %}
+        <div class="checkout-cart-item">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="checkout-item-img">
+            <div class="checkout-item-details">
+                <h3 class="checkout-item-name">{{ item.product.name }}</h3>
+                <p class="checkout-item-price">Rs {{ item.product.price }}</p>
+                <p class="checkout-item-quantity">Qty: {{ item.quantity }}</p>
+                <p class="checkout-item-size">Size: {% if item.size %}{{ item.size.name }}{% else %}N/A{% endif %}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="checkout-total">
+        <h3>Total: Rs {{ total_price }}</h3>
+    </div>
+
+    <form method="post" action="{% url 'place_order' %}" class="checkout-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="address">Delivery Address:</label>
+            <textarea name="address" id="address" required placeholder="Enter your delivery address here"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" id="phone" required placeholder="Enter your phone number">
+        </div>
+        
+        <button type="submit" class="checkout-btn">Place Order</button>
+    </form>
+</div>
+{% endblock %}

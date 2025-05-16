@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}About Us - Utopia Streetwear{% endblock %}
+
+{% block content %}
+<section class="about-us">
+    <!-- About Photo Section -->
+    <div class="about-photo-container">
+        <img src="{% static 'images/aboutus.jpg' %}" alt="Utopia Streetwear Team" class="about-photo">
+    </div>
+    
+    <!-- About Content Section -->
+    <div class="about-content-container">
+        <div class="about-sections">
+            <div class="section">
+                <h2>Who We Are?</h2>
+                <p>We are a passionate team bringing the best streetwear to Nepal. Our aim is to offer unique and stylish clothing for all fashion lovers.</p>
+            </div>
+            <div class="section">
+                <h2>What We Do?</h2>
+                <p>We design, curate, and sell the latest streetwear trends. From t-shirts to hoodies, we make sure our products reflect the latest styles.</p>
+            </div>
+            <div class="section">
+                <h2>Why Choose Us?</h2>
+                <p>We focus on quality, comfort, and fashion. Our streetwear is made for those who want to stand out and express themselves through their clothing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Section -->
+    <div class="quote-container">
+        <img src="{% static 'images/aoutus.jpg' %}" alt="Inspiration" class="quote-image">
+    </div>
+
+    <!-- Team Members Section -->
+    <div class="team-container">
+        <h3>Our Team</h3>
+        <div class="team-members">
+            <div class="team-member">Prithvi Raj Singh</div>
+            <div class="team-member">Alex Yonjan Lama</div>
+            <div class="team-member">Minisha Pulami Magar</div>
+            <div class="team-member">Lex Yonjan Lama</div>
+            <div class="team-member">Rishi Raj Budhathoki</div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Utopia Streetwear{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}" />
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/utopialogoo.png' %}" alt="Utopia Logo" />
+            </a>
+        </div>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+        </label>
+
+        <nav class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'shop' %}">Shop</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </nav>
+
+        <div class="nav-icons">
+            <a href="{% url 'view_wishlist' %}" class="icon">🛍️</a>
+            <a href="{% url 'view_cart' %}" class="icon">🛒</a>
+            <div class="profile-dropdown">
+                <a href="#" class="icon">👤</a>
+                <div class="dropdown-content">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profile' %}">Profile</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                        <a href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>          
+        <p>© 2025 Utopia Streetwear. All rights reserved.</p>
+       
+    </footer>
+    <script>
+        // Select the profile dropdown and dropdown content
+        const profileDropdown = document.querySelector('.profile-dropdown');
+        const dropdownContent = profileDropdown.querySelector('.dropdown-content');
+        
+        // Variable to store timeout ID for delay
+        let timeout;
+    
+        // Show dropdown when mouse enters the profile area
+        profileDropdown.addEventListener('mouseenter', () => {
+            clearTimeout(timeout); // Clear any previous timeout
+            dropdownContent.style.display = 'flex'; // Show the dropdown
+            dropdownContent.style.opacity = '1'; // Fade in
+            dropdownContent.style.visibility = 'visible'; // Make it visible
+            dropdownContent.style.pointerEvents = 'auto'; // Allow interaction
+        });
+    
+        // Hide dropdown after mouse leaves, with a delay
+        profileDropdown.addEventListener('mouseleave', () => {
+            timeout = setTimeout(() => {
+                dropdownContent.style.display = 'none'; // Hide the dropdown
+                dropdownContent.style.opacity = '0'; // Fade out
+                dropdownContent.style.visibility = 'hidden'; // Make it invisible
+                dropdownContent.style.pointerEvents = 'none'; // Disable interaction
+            }, 3000); // Wait for 3 seconds before hiding
+        });
+    
+        // Prevent the dropdown from closing immediately when clicked inside
+        dropdownContent.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stop the click event from propagating
+        });
+    </script>
+    
+    
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

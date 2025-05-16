@@ -1,0 +1,33 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contact-container">
+    <!-- Contact Info Section -->
+    <div class="contact-info">
+        <h1>Contact Us</h1>
+        <p>If you have any questions or feedback, feel free to reach out to us!</p>
+        <p><strong>📧 Email:</strong> support@utopiastreetwear.com</p>
+        <p><strong>📞 Phone:</strong> +977 123 456 789</p>
+        <p><strong>📍 Address:</strong> Kathmandu, Nepal</p>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" name="email" required>
+
+            <label for="message">Your Message:</label>
+            <textarea name="message" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

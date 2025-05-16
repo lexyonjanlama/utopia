@@ -1,0 +1,71 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}{{ product.name }} - Utopia Streetwear{% endblock %}
+
+{% block content %}
+<div class="product-detail-container">
+    <!-- Left Side: Product Image -->
+    <div class="product-detail-image">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    </div>
+
+    <!-- Right Side: Product Info -->
+    <div class="product-detail-info">
+        <h1 class="product-name">{{ product.name }}</h1>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="product-price">Rs{{ product.price }}</p>
+
+        <!-- Add to Cart Form -->
+        <form method="post" action="{% url 'add_to_cart' product.id %}" class="product-detail-form">
+            {% csrf_token %}
+            
+            <label for="size">Size:</label>
+            <select name="size" id="size" required class="product-size">
+                {% for size in product.sizes.all %}
+                    <option value="{{ size.id }}">{{ size.name }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" id="quantity" min="1" value="1" required class="product-quantity">
+
+            <div class="button-row">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                <a href="{% url 'add_to_wishlist' product.id %}" class="add-to-wishlist-btn">Add to Wishlist</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Customer Reviews Section -->
+<div class="reviews-section">
+    <h3>Customer Reviews</h3>
+    {% if reviews %}
+        <div class="reviews-container">
+            {% for review in reviews %}
+                <div class="review-card">
+                    <p><strong>{{ review.user.username }}</strong> - Rating: {{ review.rating }}/5</p>
+                    <p>{{ review.comment }}</p>
+                    <small>Reviewed on: {{ review.created_at }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No reviews yet. Be the first to review this product!</p>
+    {% endif %}
+</div>
+
+<!-- Leave a Review Section -->
+{% if user.is_authenticated %}
+    <div class="leave-review-section">
+        <h3>Leave a Review</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-review-btn">Submit Review</button>
+        </form>
+    </div>
+{% else %}
+    <p>You must be logged in to leave a review.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="login-container">
+    <h2 class="login-title">Login</h2>
+
+    <form method="POST" class="login-form">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.as_p }}
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    {% if form.errors %}
+      <p class="form-error">{{ form.non_field_errors }}</p>
+    {% endif %}
+
+    <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+  </div>
+{% endblock %}

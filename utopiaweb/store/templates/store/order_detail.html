@@ -1,0 +1,31 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+  <div class="order-detail-container">
+    <h2 class="order-title">Order #{{ order.id }} Details</h2>
+
+    <div class="order-summary">
+      <p><strong>Status:</strong> <span class="order-status">{{ order.status }}</span></p>
+      <p><strong>Total Price:</strong> <span class="order-price">Rs{{ order.total_price }}</span></p>
+      <p><strong>Date:</strong> <span class="order-date">{{ order.created_at }}</span></p>
+    </div>
+
+    <div class="order-items">
+      <h3 class="order-items-title">Items in this Order:</h3>
+      <ul class="order-items-list">
+        {% for item in order_items %}
+          <li class="order-item">
+            <div class="item-image">
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            </div>
+            <div class="item-info">
+              <p><strong>{{ item.product.name }}</strong></p>
+              <p>Quantity: {{ item.quantity }}</p>
+              <p>Price: Rs{{ item.product.price }}</p>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

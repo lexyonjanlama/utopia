@@ -1,0 +1,30 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Home - Utopia Streetwear{% endblock %}
+
+{% block content %}
+    <!-- Hero Section with CTA -->
+    <div class="hero-section-home">
+        <div class="hero-image">
+            <img src="{% static 'images/hero.jpg' %}" alt="Hero Image">
+            <div class="hero-text">
+                <h1>UTOPIA</h1>
+                <p>The Art Of Street Clothing.</p>
+                <a href="{% url 'shop' %}" class="cta-btn">Shop Now</a> <!-- CTA inside the image -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products Section -->
+    <h2 class="featured-title">Featured Products</h2>
+    <div class="featured-products">
+        {% for product in featured_products %}
+        <div class="product">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>Rs{{ product.price }}</p>
+            <a href="{% url 'product_detail' product.id %}" class="view-details">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

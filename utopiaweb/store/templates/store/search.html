@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Search Results - Utopia Streetwear{% endblock %}
+
+{% block content %}
+    <h1>Search Results</h1>
+    
+    {% if products %}
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>Rs{{ product.price }}</p>
+                <a href="{% url 'product_detail' product.id %}">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No products found for "{{ query }}".</p>
+    {% endif %}
+{% endblock %}

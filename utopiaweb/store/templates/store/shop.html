@@ -1,0 +1,75 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Shop - Utopia Streetwear{% endblock %}
+
+{% block content %}
+    <h1 class="shop-title">Shop</h1>
+
+    <!-- Filters and Categories -->
+    <div class="shop-filters">
+        <form method="get" action="{% url 'search' %}" class="search-form">
+            <input type="text" name="q" placeholder="Search products" value="{{ query }}">
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+
+        <div class="filters">
+            <form method="get" action="{% url 'shop' %}" class="filter-form">
+                <label for="category">Category:</label>
+                <select name="category">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == request.GET.category %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <label for="size">Size:</label>
+                <select name="size">
+                    <option value="">All Sizes</option>
+                    {% for size in sizes %}
+                    <option value="{{ size.id }}" {% if size.id == request.GET.size %}selected{% endif %}>
+                        {{ size.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit" class="filter-btn">Filter</button>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="product-heading">All Products</h2>
+    <div class="product-list">
+        {% for product in products %}
+        <div class="product-item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>Rs{{ product.price }}</p>
+            <a href="{% url 'product_detail' product.id %}" class="view-details-btn">View Details</a>
+        </div>
+        {% empty %}
+            <p>No products found.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination controls -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a href="?page=1" class="page-link">&laquo; first</a>
+                <a href="?page={{ products.previous_page_number }}" class="page-link">previous</a>
+            {% endif %}
+
+            <span class="current-page">
+                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+            </span>
+
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}" class="page-link">next</a>
+                <a href="?page={{ products.paginator.num_pages }}" class="page-link">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Your Cart - Utopia Streetwear{% endblock %}
+
+{% block content %}
+<h1 class="cart-title">Your Cart</h1>
+
+<div class="cart-container">
+    {% if cart_items %}
+        <div class="cart-items">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <img class="cart-item-img" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                <div class="cart-item-details">
+                    <h3 class="cart-item-name">{{ item.product.name }}</h3>
+                    <p class="cart-item-price">Rs{{ item.product.price }}</p>
+                    <p class="cart-item-size">Size: {% if item.size %}{{ item.size.name }}{% else %}N/A{% endif %}</p>
+                    <p class="cart-item-quantity">Quantity: {{ item.quantity }}</p>
+                    <a class="cart-item-remove" href="{% url 'remove_from_cart' cart_id=item.id %}">Remove</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-actions">
+            <a class="cart-btn checkout-btn" href="{% url 'checkout' %}">Proceed to Checkout</a>
+            <a class="cart-btn shop-btn" href="{% url 'shop' %}">Shop More</a>
+        </div>
+    {% else %}
+        <p class="cart-empty">Your cart is empty.</p>
+        <a class="cart-btn shop-btn" href="{% url 'shop' %}">Start Shopping</a>
+    {% endif %}
+</div>
+{% endblock %}

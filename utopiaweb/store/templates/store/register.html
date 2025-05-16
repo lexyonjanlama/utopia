@@ -1,0 +1,18 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Register - Utopia Streetwear{% endblock %}
+
+{% block content %}
+  <div class="register-container">
+    <h1 class="register-title">Register</h1>
+
+    <form method="post" action="{% url 'register' %}" class="register-form">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.as_p }}
+      </div>
+
+      <button type="submit" class="register-btn">Register</button>
+    </form>
+  </div>
+{% endblock %}
