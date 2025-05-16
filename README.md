@@ -83,7 +83,9 @@ GitHub: [lexyonjanlama](https://github.com/lexyonjanlama)
 
 ## 📷 Screenshots
 
-*(Add screenshots of your site here for better presentation)*
+![image](https://github.com/user-attachments/assets/aa80ff92-0eb9-438e-9545-7f8eaf9fb591)
+![image](https://github.com/user-attachments/assets/999bd44c-cd7c-4b01-8be0-5a1ea2421fb6)
+
 
 ---
 
